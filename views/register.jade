@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+    form#formAddUser(name="register",method="post",action="/register")
+        input#inputUserName(type="text", placeholder="username", name="username")
+        <br> <br>
+        input#inputUserPassword(type="password", placeholder="password", name="userpassword")
+        <br> <br>
+        button#btnSubmit(type="submit") submit
