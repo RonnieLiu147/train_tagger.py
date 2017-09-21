@@ -1,10 +1,48 @@
 extends layout
+var $ = function(param) {
+  return document.querySelector(param);
+};
+var isSend = false;
+function regitster() {
+  var userName = $('#inputUserName');
+  var userEmail = $('#inputUserEmail');
+  var userPassword = $('#inputUserPassword');
+  if (!userName.value) {
+    alert('Please enter Username');
+    return;
+  } else if (!userEmail.value) {
+    alert('Please enter Email');
+    return;
+  } else if (!userPassword.value) {
+    alert('Please enter Password');
+    return;
+  }
 
-block content
-    h1= title
-    form#formAddUser(name="register",method="post",action="/register")
-        input#inputUserName(type="text", placeholder="username", name="username")
-        <br> <br>
-        input#inputUserPassword(type="password", placeholder="password", name="userpassword")
-        <br> <br>
-        button#btnSubmit(type="submit") submit
+  isLogin = true;
+  var reqUrl = 'http://localhost:3000/registerUser';
+  axios.post(reqUrl, {
+    data: {
+      'username': userName.value,
+      'useremail': userEmail.value,
+      'userpassword': userPassword.value,
+    },
+  }).then((res) => {
+    if (res.data.code === 0) {
+      alert('welcome!')
+      window.localStorage.setItem('_id', res.data.data._id);
+      window.location.href = window.location.origin + '/home';
+    } else {
+      alert(res.data.msg);
+    }
+    isLogin = false;
+  });
+}
+
+
+window.onload = function () {
+  var registerBtn = $('#btnSubmit');
+  registerBtn.addEventListener('click', function() {
+    if (isSend) return;
+    regitster();
+  });
+};
