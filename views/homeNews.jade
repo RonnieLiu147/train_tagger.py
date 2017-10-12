@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title SERLER
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/js/axios.js')
+  body.iframe-body
+    block content
+    div.analyst-title-info
+      p News
+    div.news-main
+      p.news-main-title #{content.createTime}
+      div.news-main-text #{content.context}

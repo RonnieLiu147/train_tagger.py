@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    title SERLER
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/js/axios.js')
+  body.iframe-body
+    block content
+    div.analyst-title-info
+      p All Evidence
+    div.user-search
+      form(method="get",action="/user")
+        input#hiddenUserId(type="hidden" name="userId")
+        input#searchName(type="text" name="searchName" value=searchText autocomplete="off" placeholder="Search Name")
+        button.sure-btn-small(type="submit") Search
+    div.user-context
+      p.currentPage currentPage:
+        span#currentPage #{page}
+      table.user-table(border=1)
+        thead
+          tr
+            th(width=180) Name
+            th(width=180) Evidence
+            th(width=180) Operating
+        tbody#userBody(data-count=content.length)
+          if content.length > 0
+            - for (var x = 0; x < content.length; x++)
+              tr
+                td.col-1
+                  - var star = '★'
+                  if content[x].isTop == 1
+                    span #{star} #{content[x].username}
+                  else
+                    span #{content[x].username}
+                td.col-1
+                  if content[x].analyst
+                    a(href='http://localhost:3000/viewAnalyst?aid=' + content[x].analyst) View
+                  else
+                    span Null
+                td.col-2
+                  if user.authority != 0
+                    if user.authority == 1
+                      p
+                        a(href='http://localhost:3000/analyst?id=' + content[x].analyst +'&userId='+ content[x]._id) Update Evidence
+                    else
+                      p
+                        a(href='http://localhost:3000/analyst?id=' + content[x].analyst +'&userId='+ content[x]._id) Update Evidence
+                      p
+                        if content[x].isTop != 1
+                          a.putTop(href='http://localhost:3000/putTop?userId='+ content[x]._id) Put Top
+                        else
+                          a.channelTop(href='http://localhost:3000/channelPutTop?userId='+ content[x]._id) Cannel Top
+                  else
+                    p Permission denied
+      div.page-select
+        a.page-pre#pre ←pre
+        a.page-next#next next→
+script(src='/js/user.js')

@@ -1,0 +1,118 @@
+doctype html
+html
+  head
+    title SERLER
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body.iframe-body
+    block content
+    form#formAll(name="submitAnalyst",method="post",action="/submitAnalyst")
+      div.analyst-title-info
+        p Repository Information
+        p Analyst
+      div.analyst-context
+        div.analyst-content-slide
+        div#formAnalyst
+          input#idHidden(type="hidden", name="userId")
+          div.analyst-left
+            div.input-item
+              label.title-label 1. Research Aim
+              textarea#researchAim.textarea-input(placeholder="Aim", name="aimtext" disabled="disabled") #{content.aim}
+            div.input-item.after-item#method(data-source=content.method)
+              label.title-label 2. Research Method
+              p
+                input#methodCaseStudy.select-input(type="checkbox", value="Case Study", name="caseStudy" disabled="disabled")
+                label(for="methodCaseStudy") Case Study
+              p
+                input#methodFieIdObservation.select-input(type="checkbox",value="FieId Observation",name="fieIdObservation" disabled="disabled")
+                label(for="methodFieIdObservation") FieId Observation
+              p
+                input#methodExperiment.select-input(type="checkbox" value="Experiment",name="experiment" disabled="disabled")
+                label(for="methodExperiment") Experiment
+              p
+                input#methodInterview.select-input(type="checkbox" value="Interview",name="interview" disabled="disabled")
+                label(for="methodInterview") Interview
+              p
+                input#methodSurvey.select-input(type="checkbox" value="Survey",name="survey" disabled="disabled")
+                label(for="methodSurvey") Survey
+          div.analyst-right
+            div.input-item
+              label.title-label 3. Research Metric(s)
+              textarea#researchMetric.textarea-input(placeholder="Metric(s)" ,name="metrictext" disabled="disabled") #{content.Metric}
+            div.input-item.after-item#participants(data-source=content.participants)
+              label.title-label 4. Research Participants
+              p
+                input#methodUndergraduate.select-input(type="checkbox" value="Undergraduate Students",name="undergraduate" disabled="disabled")
+                label(for="methodUndergraduate") Undergraduate Students
+              p
+                input#methodPostgraduate.select-input(type="checkbox" value="Postgraduate Students",name="postgraduate" disabled="disabled")
+                label(for="methodPostgraduate") Postgraduate Students
+              p
+                input#methodPractioners.select-input(type="checkbox" value="Practioners",name="practioners" disabled="disabled")
+                label(for="methodPractioners") Experiment
+
+
+
+      div.analyst-title-info
+          p Evidence Item
+      div.analyst-context
+        div.analyst-content-slide
+        div#formAnalyst
+          div.analyst-left
+            div.input-item
+              label.title-label 1. Benefit/Outcome
+              textarea#benefitOrOutcome.textarea-input(placeholder="Benefit/Outcome", name="benefitOrOutcome" disabled="disabled") #{content.benefitOrOutcome}
+            div.input-item
+              label.title-label.after-item 2. Context
+                div.analyst-context-input
+                  span Where:
+                  input(type="text" name="contextWhere" value=content.contextWhere disabled="disabled")
+                div.analyst-context-input
+                  span When:
+                  input(type="text" name="contextWhen" value=content.contextWhen disabled="disabled")
+                div.analyst-context-input
+                  span How:
+                  input(type="text" name="contextHow" value=content.contextHow disabled="disabled")
+                div.analyst-context-input
+                  span What:
+                  input(type="text" name="contextWhatOne" value=content.contextWhatOne disabled="disabled")
+                div.analyst-context-input
+                  span What:
+                  input(type="text" name="contextWhatTwo" value=content.contextWhatTwo disabled="disabled")
+          div.analyst-right
+            div.input-item
+              label.title-label 3.Result
+              textarea#benefitOrOutcome.textarea-input(placeholder="Result", name="result" disabled="disabled") #{content.result}
+            div.input-item.after-item
+              input#inputRater(type="hidden" name="rater")
+              label.title-label 4. Confidence Rating
+              div.uploadArticle-star
+                if content.rater
+                  - for(var x = 0; x < content.rater; x++)
+                    i.star ★
+                else
+                  i.star ☆
+                  i.star ☆
+                  i.star ☆
+                  i.star ☆
+                  i.star ☆
+            div.input-item.after-item
+              label.title-label 5. Method Implementation Integrity
+              select.analyst-select(name="integrity" value=content.integrity disabled="disabled")
+                if content.integrity
+                  if content.integrity == 'Height'
+                    option(value="Hight" selected) Hight
+                  else
+                    option(value="Hight") Hight
+                  if content.integrity == 'Medium'
+                    option(value="Medium" selected) Medium
+                  else
+                    option(value="Medium") Medium
+                  if content.integrity == 'File size'
+                    option(value="File size" selected) File size
+                  else
+                    option(value="File size") File size
+                else
+                  option(value="Hight") Hight
+                  option(value="Medium") Medium
+                  option(value="File size") File size
+script(src='/js/viewAnalyst.js')
