@@ -1,48 +1,31 @@
 extends layout
-var $ = function(param) {
-  return document.querySelector(param);
-};
-var isSend = false;
-function regitster() {
-  var userName = $('#inputUserName');
-  var userEmail = $('#inputUserEmail');
-  var userPassword = $('#inputUserPassword');
-  if (!userName.value) {
-    alert('Please enter Username');
-    return;
-  } else if (!userEmail.value) {
-    alert('Please enter Email');
-    return;
-  } else if (!userPassword.value) {
-    alert('Please enter Password');
-    return;
-  }
 
-  isLogin = true;
-  var reqUrl = 'http://localhost:3000/registerUser';
-  axios.post(reqUrl, {
-    data: {
-      'username': userName.value,
-      'useremail': userEmail.value,
-      'userpassword': userPassword.value,
-    },
-  }).then((res) => {
-    if (res.data.code === 0) {
-      alert('welcome!')
-      window.localStorage.setItem('_id', res.data.data._id);
-      window.location.href = window.location.origin + '/home';
-    } else {
-      alert(res.data.msg);
-    }
-    isLogin = false;
-  });
-}
+block content
+  header.analyst-title
+    h2.middle-title SERLER
+  div
+    div.register-title Register
+    div.register-input
+      p
+        span Username:
+        input#inputUserName(type="text", placeholder="username", name="username")
+      p
+        span Email:
+        input#inputUserEmail(type="text", placeholder="useremail", name="useremail")
+      p
+        span Password:
+        input#inputUserPassword(type="password", placeholder="password", name="userpassword")
+      div.authority-title Who are you
+        div
+          input.selectAuthority#authUser(type="radio" name="authority" value="0" checked=true)
+          label(for="authUser") User
+        div
+          input.selectAuthority#authAnalyst(type="radio" name="authority" value="1")
+          label(for="authAnalyst") Analyst
+        div
+          input.selectAuthority#authAdmin(type="radio" name="authority" value="2")
+          label(for="authAdmin") Administrator
 
-
-window.onload = function () {
-  var registerBtn = $('#btnSubmit');
-  registerBtn.addEventListener('click', function() {
-    if (isSend) return;
-    regitster();
-  });
-};
+    div.register-btn
+      button.sure-btn#btnSubmit(type="submit") Create an account
+  script(src='/js/register.js')

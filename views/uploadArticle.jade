@@ -4,37 +4,39 @@ html
     title SERLER
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/js/axios.js')
-  body
+  body.iframe-body
     block content
+    div
       div.analyst-title-info
         p Upload Article
       div.uploadArticle-input
         form#uploadForm(method="post",action="/submitUploadArticle")
           input#idHidden(type="hidden", name="userId")
+          input#userNameHidden(type="hidden", name="userName")
           p
             span Author:
-            input#inputAuthor(type="text", placeholder="Author", name="author")
+            input#inputAuthor(type="text", placeholder="Author", name="author", value=content.author)
           p
             span Title:
-            input#inputTitle(type="text", placeholder="Title", name="title")
+            input#inputTitle(type="text", placeholder="Title", name="title",value=content.title)
           p
             span Journal:
-            input#inputJournal(type="text", placeholder="Journal", name="journal")
+            input#inputJournal(type="text", placeholder="Journal", name="journal",value=content.journal)
           p
             span Year:
-            input#inputYear(type="text", placeholder="Year", name="year")
+            input#inputYear(type="text", placeholder="Year", name="year",value=content.year)
           p
             span Volume:
-            input#inputVolume(type="text", placeholder="Volume", name="volume")
+            input#inputVolume(type="text", placeholder="Volume", name="volume",value=content.volume)
           p
             span Number:
-            input#inputNumber(type="text", placeholder="Number", name="number")
+            input#inputNumber(type="text", placeholder="Number", name="number",value=content.number)
           p
             span Pages:
-            input#inputPages(type="text", placeholder="Pages", name="pages")
+            input#inputPages(type="text", placeholder="Pages", name="pages",value=content.pages)
           p#rater
             span Month:
-            input#inputMonth(type="text", placeholder="Month", name="month")
+            input#inputMonth(type="text", placeholder="Month", name="month",value=content.month)
           div.uploadArticle-star
             i.star ☆
             i.star ☆
@@ -44,4 +46,8 @@ html
             input#inputRater(type="hidden", name="rater")
           div.uploadArticle-btn
             button#uploadArticleSubmit(type="submit") Enter
+        form#uploadArticleFile(action="/upload", method="post",enctype="multipart/form-data")
+          div.uploadFileDiv
+            input#uploadArticleInput(type="file" name="recfile")
+            a.login-btn-a#uploadArticleFileBtn Upload File
         script(src='/js/uploadArticle.js')

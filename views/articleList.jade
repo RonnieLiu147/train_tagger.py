@@ -1,0 +1,55 @@
+doctype html
+html
+  head
+    title SERLER
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/js/axios.js')
+  body.iframe-body
+    block content
+    div.analyst-title-info
+      p All Article
+    div.user-search
+      form(method="get",action="/articleList")
+        input#hiddenUserId(type="hidden" name="userId")
+        input#searchName(type="text" name="searchName" value=searchText autocomplete="off" placeholder="Search Upload User")
+        button.sure-btn-small(type="submit") Search
+    div.user-context
+      p.currentPage currentPage:
+        span#currentPage #{page}
+      table.user-table(border=1)
+        thead
+          tr
+            th(width="330") Article
+            th(width=330) Upload User
+            th(width=330) Create Time
+            th(width=330) Operating
+        tbody#userBody(data-count=content.length)
+          if content.length > 0
+            - for (var x = 0; x < content.length; x++)
+              tr
+                td.col-1
+                  - var star = '★'
+                  if content[x].isTop == 1
+                    span #{star} &nbsp;
+                      a(href='http://localhost:3000/viewArticle?aid=' + content[x]._id) View
+                  else
+                    a(href='http://localhost:3000/viewArticle?aid=' + content[x]._id) View
+                td.col-1
+                  span #{content[x].userName}
+                td.col-1
+                  span #{content[x].createTime}
+                td.col-2
+                  if user.authority == 2
+                    p
+                      a(href='http://localhost:3000/removeArticle?id=' + content[x]._id +'&userId='+ content[x].userId) Remove Article
+                    p
+                      if content[x].isTop != 1
+                        a.putTop(href='http://localhost:3000/putTopArticle?aId='+ content[x]._id) Put Top
+                      else
+                        a.channelTop(href='http://localhost:3000/channelPutTopArticle?aId='+ content[x]._id) Cannel Top
+                  else
+                    p Permission denied
+      div.page-select
+        a.page-pre#pre ←pre
+        a.page-next#next next→
+script(src='/js/articleList.js')

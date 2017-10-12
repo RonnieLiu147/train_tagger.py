@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title SERLER
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+    div
+      div.analyst-title-info
+        p Article
+      div.uploadArticle-input
+        form#uploadForm(method="post",action="/submitUploadArticle")
+          input#idHidden(type="hidden", name="userId")
+          p
+            span Author:
+            input#inputAuthor(type="text", name="author", value=content.author disabled="disabled")
+          p
+            span Title:
+            input#inputTitle(type="text", name="title",value=content.title disabled="disabled")
+          p
+            span Journal:
+            input#inputJournal(type="text", name="journal",value=content.journal disabled="disabled")
+          p
+            span Year:
+            input#inputYear(type="text", name="year",value=content.year disabled="disabled")
+          p
+            span Volume:
+            input#inputVolume(type="text", name="volume",value=content.volume disabled="disabled")
+          p
+            span Number:
+            input#inputNumber(type="text", name="number",value=content.number disabled="disabled")
+          p
+            span Pages:
+            input#inputPages(type="text", name="pages",value=content.pages disabled="disabled")
+          p#rater
+            span Month:
+            input#inputMonth(type="text", name="month",value=content.month)
+          div.uploadArticle-star
+            if content.rater
+              - for(var x = 0; x < content.rater; x++)
+                i.star ★
+            else
+              i.star ☆
+              i.star ☆
+              i.star ☆
+              i.star ☆
+              i.star ☆

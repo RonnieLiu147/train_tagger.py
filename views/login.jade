@@ -1,40 +1,19 @@
-var $ = function(param) {
-  return document.querySelector(param);
-};
-var isLogin = false;
-function login() {
-  var username = $('#inputUserName');
-  var userpassword = $('#inputUserPassword');
-  if (!username.value) {
-    alert('Please enter username');
-    return;
-  } else if (!userpassword.value) {
-    alert('Please enter password');
-    return;
-  }
-  isLogin = true;
-  var reqUrl = 'http://localhost:3000/userLogin';
-  axios.post(reqUrl, {
-    data: {
-      'username': username.value,
-      'userpassword': userpassword.value,
-    },
-  }).then((res) => {
-    if (res.data.code === 0) {
-      alert('welcome!')
-      window.localStorage.setItem('_id', res.data.data._id);
-      window.location.href = window.location.origin + '/home';
-    } else {
-      alert(res.data.msg);
-    }
-    isLogin = false;
-  });
-}
+extends layout
 
-window.onload = function() {
-  var loginBtn = $('#btnSubmit');
-  loginBtn.addEventListener('click', function() {
-    if (isLogin) return;
-    login();
-  });
-};
+block content
+  header.analyst-title
+    h2.middle-title SERLER
+  div
+    div.login-title LOGIN
+    div.login-input
+      p
+        span.input-title Username:
+        input#inputUserName(type="text", placeholder="username or email", name="username")
+      a.fotgot-pwd Forgot password?
+      p
+        span.input-title Password:
+        input#inputUserPassword(type="password", placeholder="password", name="userpassword")
+        span.input-container new to here？
+          a(href="http://localhost:3000/register") Create an account .
+      button.login-btn#btnSubmit Login
+  script(src='/js/login.js')

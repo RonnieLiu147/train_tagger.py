@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title SERLER
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+      header.analyst-title
+        h2.middle-title SERLER
+    div.login-title How would you like to upload
+    div.select-btn-box
+      a.login-btn-a#manually(href="http://localhost:3000/uploadArticle") Enter Manully
+    div.select-btn-box
+      a.login-btn-a#bibtex() Upload Bibtex

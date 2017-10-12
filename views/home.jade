@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title SERLER
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/js/axios.js')
+  body
+    block content
+    header.analyst-title
+      div.left-tips Welcome!
+      h2.middle-title SERLER
+      div.right-tips
+        p Auth:
+          span#authName
+          a#logout Logout
+    div.leftMenu#meun
+      ul
+        li#UploadArticle(data-href="uploadArticle" style="display:none") UploadArticle
+        li#viewArticle(data-href="articleList") Article List
+        li#viewUser(data-href="user") Evidence List
+        li#viewPushNews(data-href="news" style="display:none") Release News
+    div.right-container
+      iframe.home-iframe#homeIframe(src="http://localhost:3000/index")
+script(src='/js/home.js')
